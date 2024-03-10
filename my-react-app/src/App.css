@@ -93,6 +93,14 @@ import LinearGradient from react-native-linear-gradient
   border-radius: 1rem;
 }
 
+.summary-text {
+  font-size: 20px; /* Set font size to 20px */
+  padding-top: 25px; /* Add extra padding of 20px on the top */
+  padding-right: 10px; /* Add padding of 10px on the right */
+  padding-bottom: 10px; /* Add padding of 10px on the bottom */
+  padding-left: 10px; /* Add padding of 10px on the left */
+}
+
 
 .text-box {
   background: rgba(255,255,255,0.5);
