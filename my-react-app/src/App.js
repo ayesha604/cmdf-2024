@@ -6,15 +6,17 @@ import upload_image from './cloud-upload.svg'
 import summarize_image from './pencil.svg'
 import axios from 'axios';
 import './App.css';
+import ReactMarkdown from 'react-markdown';
 
-function App() {
+ function App() {
+  const sampleData = {"message":"# Summary of the Universal Declaration of Human Rights\n\n## Preamble\nThe preamble presents the foundational beliefs underpinning the declaration, such as the inherent dignity and equal rights of all human beings, the necessity of protecting human rights by law, the promotion of friendly relations between nations, and the commitment of Member States to achieve universal respect and observance of human rights.\n\n## Articles\nThe subsequent articles outline specific rights and freedoms, such as the right to life, liberty, and security, prohibition of slavery and torture, equal protection before the law, the right to an effective remedy, freedom of movement and residence, the right to seek asylum, the right to own property, freedom of thought, conscience, and religion, freedom of opinion and expression, right to work and to rest, the right to education, and the duty to the community along with prescribed limitations.\n\n## Conclusion \nThe declaration concludes by asserting that nothing in the declaration should be interpreted as granting any entity the right to engage in activities aimed at destroying any of the rights and freedoms outlined.\n\nThis summary covers the main points and provisions of the Universal Declaration of Human Rights."}
+
   const [url, setURL] = React.useState("");
   const [display, setDisplay] = React.useState("");
   const [textbox, setBox] = React.useState(false);
   const ref = useRef();
 
   var inputText = "";
-
   const serverURL = "http://localhost:3001/api"
   
   const fetchInfo = () => { 
@@ -29,7 +31,7 @@ function App() {
              .then((response) => setDisplay(response.data.message))
              .catch(error => console.log(error));
   }
-  
+
   React.useEffect(() => {
     fetchInfo(); 
   }, [url])
@@ -75,7 +77,13 @@ function App() {
           </div>
           <div className='child2'>
             <div className="text-title">Summarized Text</div>
-            <div className="text-box"></div>
+            <div className="text-box">
+              <div className="summary-text">
+                <ReactMarkdown>
+                 {sampleData.message}
+                </ReactMarkdown>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -25,7 +25,7 @@ app.use(cors());
 async function fetchPdfToText(pdf) {
 
   const data = {
-    "url": pdf,
+    "url": "pdf",
     "lang": "eng",
     "inline": true,
     "pages": "0-",
@@ -50,9 +50,11 @@ async function fetchPdfToText(pdf) {
 }
 
 app.post("/api", async (req, res) => {
-    const text = await fetchPdfToText(req.body.url);
-    const summary = await summarize(text);
-    res.json({ message: summary.choices[0].message.content });
+    const text = await fetchPdfToText(req.body.url).then(text => {
+      summarize(text);
+    });
+    // const summary = await summarize(text);
+    res.json({ message: text.choices[0].message.content });
   });
   
 app.listen(PORT, () => {
